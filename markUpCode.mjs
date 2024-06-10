@@ -22,6 +22,9 @@ export default class MarkUpCode {
     .hov:hover #background {  filter: invert(100%); }
     .hov:hover #symbol { filter: invert(100%); }
 
+    .hov:hover #backgroundSquare { fill:white; }
+    .hov:hover #symbol2 { fill:var(--blue); }
+
     </style>   
     `
   }
@@ -76,6 +79,10 @@ export default class MarkUpCode {
 
   static circleWhite() {
     return `<circle id="background" fill="white" cx="256" cy="256" r="256" />`
+  }
+
+  static squareWhite() {
+    return `<rect id="backgroundSquare" fill="#0000" width="700px" height="700px" />`
   }
 
   static getSymbolClose() {
@@ -150,9 +157,9 @@ export default class MarkUpCode {
 
   // viewBox="0 0 24 24"
   static getSharing(isWhite=true) {
-    return `
+    return MarkUpCode.squareWhite() + `
     <g transform="scale(20, 20)">
-      <path id="symbol" d="M18 16c-.7 0-1.3.2-1.8.6L9 12.4v-.8l7.3-4.2c.4.4 1 .6 1.7.6 1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3c0 .3 0 .5.1.8l-7 4.1C7.5 9.3 6.8 9 6 9c-1.7 0-3 1.3-3 3s1.3 3 3 3c.8 0 1.5-.3 2.1-.8l7 4.1c-.1.2-.1.4-.1.7 0 1.7 1.3 3 3 3s3-1.3 3-3-1.3-3-3-3" fill="${isWhite?"white":"var(--blue)"}"/>
+      <path id="symbol2" d="M18 16c-.7 0-1.3.2-1.8.6L9 12.4v-.8l7.3-4.2c.4.4 1 .6 1.7.6 1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3c0 .3 0 .5.1.8l-7 4.1C7.5 9.3 6.8 9 6 9c-1.7 0-3 1.3-3 3s1.3 3 3 3c.8 0 1.5-.3 2.1-.8l7 4.1c-.1.2-.1.4-.1.7 0 1.7 1.3 3 3 3s3-1.3 3-3-1.3-3-3-3" fill="${isWhite?"white":"var(--blue)"}"/>
     </g>
     `
   }
@@ -163,7 +170,7 @@ export default class MarkUpCode {
 
   static getInfo() {
     return `
-    ${MarkUpCode.circle()}
+    ${MarkUpCode.circleWhite()}
     <g transform="scale(0.5, 0.5) translate(400 210)">
       <path id="symbol" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z" fill="#0e47cb"></path>
     </g>
