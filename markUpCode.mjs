@@ -51,10 +51,7 @@ export default class MarkUpCode {
 		return t.content
 	}
 
-  static get(symbol, symbolDeactivated=null, isHoverable=true, w=40, h=40) {
-    if(w===null) {w=40}
-    if(h===null) {h=40}
-    if(isHoverable===null) {isHoverable=true}
+  static get(symbol, symbolDeactivated, isHoverable, w, h) {
 
     let retVal = `
     <svg id="sa" class="${isHoverable?"hov":""}" width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; pointer-events: auto;" tabindex="0">

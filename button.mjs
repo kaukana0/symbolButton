@@ -10,13 +10,21 @@ import MarkUpCode from  "./markUpCode.mjs"		// keep this file html/css free
 
 class Element extends HTMLElement {
 
+	getAttr(name, _default) {
+		const r = this.hasAttribute(name) ? this.getAttribute(name) : _default
+		return r
+	}
+
 	constructor() {	
 		super()	
 		this.attachShadow({mode: 'open'})
-		const size = this.getAttribute("size")
+		const size = this.getAttr("size",40)
 		const tmp = MarkUpCode.getHtmlTemplate(MarkUpCode.get( 
-			this.getAttribute("symbol"), this.getAttribute("symbolDeactivated"), 
-			this.getAttribute("hoverable"), size, size
+			this.getAttr("symbol"),
+			this.getAttr("symbolDeactivated"),
+			this.getAttr("hoverable","true")=="true",
+			size, 
+			size
 		)).cloneNode(true)
 		this.shadowRoot.appendChild(tmp)
 		this.#init()
