@@ -22,6 +22,9 @@ export default class MarkUpCode {
     .hov:hover #background {  filter: invert(100%); }
     .hov:hover #symbol { filter: invert(100%); }
 
+    .hov:hover #backgroundSquare { fill:white; }
+    .hov:hover #symbol2 { fill:var(--blue); }
+
     #sa, #sd {all: unset;}
     #sa:focus-visible, #sd:focus-visible {
       outline: -webkit-focus-ring-color auto 1px;
@@ -53,10 +56,7 @@ export default class MarkUpCode {
 		return t.content
 	}
 
-  static get(symbol, symbolDeactivated=null, isHoverable=true, w=40, h=40) {
-    if(w===null) {w=40}
-    if(h===null) {h=40}
-    if(isHoverable===null) {isHoverable=true}
+  static get(symbol, symbolDeactivated, isHoverable, w, h) {
 
     let retVal = `
     <button id="sa">
@@ -66,9 +66,9 @@ export default class MarkUpCode {
 
     if(symbolDeactivated) {
       retVal += `<button id="sd">
-      <svg class="${isHoverable?"hov":""}" width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; pointer-events: auto;">
-        ${this.#symbols[symbolDeactivated]()}
-      </svg></button>`
+        <svg class="${isHoverable?"hov":""}" width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; pointer-events: auto;">
+          ${this.#symbols[symbolDeactivated]()}
+        </svg></button>`
     }
 
     retVal += this.getCSS()
@@ -84,6 +84,10 @@ export default class MarkUpCode {
     return `<circle id="background" fill="white" cx="256" cy="256" r="256" />`
   }
 
+  static squareWhite() {
+    return `<rect id="backgroundSquare" fill="#0000" width="700px" height="700px" />`
+  }
+  
   static getSymbolClose() {
     return `
     ${MarkUpCode.circle()}
@@ -156,9 +160,9 @@ export default class MarkUpCode {
 
   // viewBox="0 0 24 24"
   static getSharing(isWhite=true) {
-    return `
+    return MarkUpCode.squareWhite() + `
     <g transform="scale(20, 20)">
-      <path id="symbol" d="M18 16c-.7 0-1.3.2-1.8.6L9 12.4v-.8l7.3-4.2c.4.4 1 .6 1.7.6 1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3c0 .3 0 .5.1.8l-7 4.1C7.5 9.3 6.8 9 6 9c-1.7 0-3 1.3-3 3s1.3 3 3 3c.8 0 1.5-.3 2.1-.8l7 4.1c-.1.2-.1.4-.1.7 0 1.7 1.3 3 3 3s3-1.3 3-3-1.3-3-3-3" fill="${isWhite?"white":"var(--blue)"}"/>
+      <path id="symbol2" d="M18 16c-.7 0-1.3.2-1.8.6L9 12.4v-.8l7.3-4.2c.4.4 1 .6 1.7.6 1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3c0 .3 0 .5.1.8l-7 4.1C7.5 9.3 6.8 9 6 9c-1.7 0-3 1.3-3 3s1.3 3 3 3c.8 0 1.5-.3 2.1-.8l7 4.1c-.1.2-.1.4-.1.7 0 1.7 1.3 3 3 3s3-1.3 3-3-1.3-3-3-3" fill="${isWhite?"white":"var(--blue)"}"/>
     </g>
     `
   }
