@@ -22,6 +22,11 @@ export default class MarkUpCode {
     .hov:hover #background {  filter: invert(100%); }
     .hov:hover #symbol { filter: invert(100%); }
 
+    #sa, #sd {all: unset;}
+    #sa:focus-visible, #sd:focus-visible {
+      outline: -webkit-focus-ring-color auto 1px;
+    }
+
     </style>   
     `
   }
@@ -54,15 +59,16 @@ export default class MarkUpCode {
     if(isHoverable===null) {isHoverable=true}
 
     let retVal = `
-    <svg id="sa" class="${isHoverable?"hov":""}" width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; pointer-events: auto;" tabindex="0">
+    <button id="sa">
+    <svg class="${isHoverable?"hov":""}" width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; pointer-events: auto;">
       ${this.#symbols[symbol](true)}
-    </svg>`
+    </svg></button>`
 
     if(symbolDeactivated) {
-      retVal += `
-      <svg id="sd" class="${isHoverable?"hov":""}" width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; pointer-events: auto;" tabindex="0">
+      retVal += `<button id="sd">
+      <svg class="${isHoverable?"hov":""}" width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; pointer-events: auto;">
         ${this.#symbols[symbolDeactivated]()}
-      </svg>`
+      </svg></button>`
     }
 
     retVal += this.getCSS()
